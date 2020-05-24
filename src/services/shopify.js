@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import ShopifyBuy from "shopify-buy"
 
 export const ShopifyContext = React.createContext()
 
 const client = ShopifyBuy.buildClient({
-  domain: "DOMAIN",
-  storefrontAccessToken: "ACCESS_TOKEN"
+  domain: "puzzleinthesky.myshopify.com",
+  storefrontAccessToken: "8a2ea1499096c75572207a0f91789ff0"
 })
 
 export function ShopifyProvider(props) {
