@@ -13,7 +13,7 @@ export function ShopifyProvider(props) {
 
   const [products, setProducts] = useState()
   const [checkout, setCheckout] = useState()
-  const [checkoutOpen, setCheckoutOpen] = useState("false")
+  const [checkoutOpen, setCheckoutOpen] = useState(false)
 
   useEffect(() => {
     if (!products && !checkout) {

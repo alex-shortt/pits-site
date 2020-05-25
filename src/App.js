@@ -8,6 +8,8 @@ import ScrollToTop from "components/ScrollToTop"
 import GA from "services/ga"
 import { ShopifyProvider } from "services/shopify"
 
+import Cart from "./components/Cart"
+
 const View = React.lazy(() => import("scenes/View"))
 const Product = React.lazy(() => import("scenes/Product"))
 
@@ -20,6 +22,7 @@ const GoogleAnalytics = () => {
 export default function App() {
   return (
     <ShopifyProvider>
+      <Cart />
       <GlobalStyles />
       <React.Suspense fallback={<FullScreenLoading />}>
         <Router>

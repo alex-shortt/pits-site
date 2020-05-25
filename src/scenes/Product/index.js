@@ -12,16 +12,7 @@ const LoadingText = styled.h1`
 `
 
 const Container = styled.div`
-  display: flex;
-  height: 100%;
-  justify-content: space-evenly;
   width: 100%;
-  flex-direction: row;
-  overflow: auto;
-
-  @media screen and (max-width: 875px) {
-    display: block;
-  }
 `
 
 export default function Product(props) {
@@ -32,6 +23,8 @@ export default function Product(props) {
   } = props
 
   const shopify = useContext(ShopifyContext)
+
+  const { products, setCheckoutOpen } = shopify
 
   if (!shopify.products) {
     return <LoadingText>Loading...</LoadingText>
@@ -50,5 +43,15 @@ export default function Product(props) {
     )
   }
 
-  return <Container>{JSON.stringify(product)}</Container>
+  return (
+    <Container>
+      <button type="submit" onClick={() => setCheckoutOpen(true)}>
+        open cart
+      </button>
+      <br />
+      <br />
+      <br />
+      {JSON.stringify(product)}
+    </Container>
+  )
 }
