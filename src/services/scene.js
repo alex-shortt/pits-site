@@ -12,7 +12,7 @@ export class ThreeScene {
 
     // camera
     const camera = new THREE.PerspectiveCamera(50, width / height, 2, 2000)
-    camera.position.set(0, 0, -5)
+    camera.position.set(0, 0, -3)
     camera.lookAt(0, 0, 1200)
 
     // renderer
