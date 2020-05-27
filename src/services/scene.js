@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import Stats from "stats-js"
 import { Sky } from "three/examples/jsm/objects/Sky"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { RoughnessMipmapper } from "three/examples/jsm/utils/RoughnessMipmapper"
@@ -26,6 +27,7 @@ export class ThreeScene {
     const ambientLight = new THREE.AmbientLight(0xcccccc, 2)
     scene.add(ambientLight)
 
+    // light
     const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
     directionalLight.position.x = 0
     directionalLight.position.y = 10
@@ -38,12 +40,17 @@ export class ThreeScene {
     renderer.setSize(width, height)
     renderer.setPixelRatio(window.devicePixelRatio)
 
+    // stats
+    const stats = new Stats()
+    containerRef.appendChild(stats.dom)
+
     containerRef.appendChild(renderer.domElement)
     // exports
     this.containerRef = containerRef
     this.scene = scene
     this.camera = camera
     this.renderer = renderer
+    this.stats = stats
 
     // events
     window.addEventListener("resize", this.handleWindowResize)
@@ -67,6 +74,7 @@ export class ThreeScene {
 
   initSky = () => {
     const { scene } = this
+
     // Add Sky
     const sky = new Sky()
     sky.scale.setScalar(450000)
@@ -89,7 +97,7 @@ export class ThreeScene {
       luminance: 1,
       inclination: 0.1714, // elevation / inclination
       azimuth: 0.25, // Facing front,
-      sun: !true
+      sun: false
     }
 
     const distance = 400000
@@ -116,9 +124,9 @@ export class ThreeScene {
   onDocumentMouseMove = event => {
     const { containerRef } = this
     const { clientWidth: width, clientHeight: height } = containerRef
+
     mouseX = (event.clientX - width / 2) / (width / 2)
     mouseY = (event.clientY - height / 2) / (height / 2)
-    this.animate()
   }
 
   initKeanu = () => {
@@ -138,13 +146,19 @@ export class ThreeScene {
     })
   }
 
-  animate = () => {
-    requestAnimationFrame(this.animate)
+  startAnimationLoop = () => {
+    const { stats } = this
+
+    stats.begin()
     this.render()
+    stats.end()
+
+    this.requestID = requestAnimationFrame(this.startAnimationLoop)
   }
 
   render = () => {
     const { camera, scene, renderer } = this
+
     camera.position.x = mouseX * 0.075
     camera.position.y = 1.5 + mouseY * 0.05
     camera.lookAt(0, 0.25, 0)

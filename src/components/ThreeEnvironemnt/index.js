@@ -23,7 +23,7 @@ export default function ThreeEnvironment(props) {
       scene.threeSetup(containerRef.current)
       scene.initSky()
       scene.initKeanu()
-      // scene.startAnimationLoop()
+      scene.startAnimationLoop()
 
       setSetup(true)
     }
