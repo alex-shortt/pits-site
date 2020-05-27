@@ -21,8 +21,9 @@ export default function ThreeEnvironment(props) {
     if (setup === false) {
       const scene = new ThreeScene()
       scene.threeSetup(containerRef.current)
-      scene.sceneSetup()
-      scene.startAnimationLoop()
+      scene.initSky()
+      scene.initKeanu()
+      // scene.startAnimationLoop()
 
       setSetup(true)
     }

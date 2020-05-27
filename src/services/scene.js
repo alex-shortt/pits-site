@@ -1,66 +1,60 @@
 import * as THREE from "three"
-import Stats from "stats-js"
+import { Sky } from "three/examples/jsm/objects/Sky"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { RoughnessMipmapper } from "three/examples/jsm/utils/RoughnessMipmapper"
+
+import keanu from "../models/keanu/keanu2.glb"
+
+let mouseX
+let mouseY
 
 export class ThreeScene {
   threeSetup = containerRef => {
     // get container dimensions and use them for scene sizing
     const { clientWidth: width, clientHeight: height } = containerRef
 
+    mouseX = 0
+    mouseY = 0
+    // camera
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000)
+    camera.position.set(0, 1.5, 1)
+    camera.rotation.set(315, 0, 0)
+    camera.lookAt(0, 0.25, 0)
+
     // scene
     const scene = new THREE.Scene()
-    scene.fog = new THREE.Fog(0x000000, 250, 2000)
+    const ambientLight = new THREE.AmbientLight(0xcccccc, 2)
+    scene.add(ambientLight)
 
-    // camera
-    const camera = new THREE.PerspectiveCamera(50, width / height, 2, 2000)
-    camera.position.set(0, 0, -3)
-    camera.lookAt(0, 0, 1200)
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+    directionalLight.position.x = 0
+    directionalLight.position.y = 10
+    directionalLight.position.z = 10
+    scene.add(directionalLight)
+    scene.add(camera)
 
     // renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(width, height)
-    renderer.setClearColor(scene.fog.color, 1)
-    renderer.shadowMap.enabled = true
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap
     renderer.setPixelRatio(window.devicePixelRatio)
-    renderer.autoClear = false
-    containerRef.appendChild(renderer.domElement) // mount using React ref
 
-    // stats
-    const stats = new Stats()
-    document.body.appendChild(stats.dom)
-
+    containerRef.appendChild(renderer.domElement)
     // exports
     this.containerRef = containerRef
     this.scene = scene
     this.camera = camera
     this.renderer = renderer
-    this.stats = stats
 
     // events
     window.addEventListener("resize", this.handleWindowResize)
-  }
+    document.addEventListener("mousemove", this.onDocumentMouseMove, false)
 
-  sceneSetup = () => {
-    const { scene } = this
-
-    const geometry = new THREE.BoxGeometry(1, 1, 1)
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-    const cube = new THREE.Mesh(geometry, material)
-    scene.add(cube)
-  }
-
-  startAnimationLoop = () => {
-    const { renderer, scene, camera, stats } = this
-
-    stats.begin()
-    renderer.render(scene, camera)
-    stats.end()
-
-    this.requestID = window.requestAnimationFrame(this.startAnimationLoop)
+    this.render()
   }
 
   handleWindowResize = () => {
-    const { containerRef, renderer, camera, environment, noisebox } = this
+    const { containerRef, renderer, camera } = this
+
     const { clientWidth: width, clientHeight: height } = containerRef
 
     // resize renderer
@@ -69,10 +63,93 @@ export class ThreeScene {
     // camera
     camera.aspect = width / height
     camera.updateProjectionMatrix()
+  }
 
-    // resize classes
-    environment.handleResize()
-    noisebox.handleResize()
+  initSky = () => {
+    const { scene } = this
+    // Add Sky
+    const sky = new Sky()
+    sky.scale.setScalar(450000)
+    scene.add(sky)
+
+    // Add Sun Helper
+    const sunSphere = new THREE.Mesh(
+      new THREE.SphereBufferGeometry(20000, 16, 8),
+      new THREE.MeshBasicMaterial({ color: 0xffffff })
+    )
+    sunSphere.position.y = -700000
+    sunSphere.visible = false
+    scene.add(sunSphere)
+
+    const effectController = {
+      turbidity: 10,
+      rayleigh: 2,
+      mieCoefficient: 0.025,
+      mieDirectionalG: 0.985,
+      luminance: 1,
+      inclination: 0.1714, // elevation / inclination
+      azimuth: 0.25, // Facing front,
+      sun: !true
+    }
+
+    const distance = 400000
+
+    sky.material.uniforms.turbidity.value = effectController.turbidity
+    sky.material.uniforms.rayleigh.value = effectController.rayleigh
+    sky.material.uniforms.mieCoefficient.value = effectController.mieCoefficient
+    sky.material.uniforms.mieDirectionalG.value =
+      effectController.mieDirectionalG
+    sky.material.uniforms.luminance.value = effectController.luminance
+
+    const theta = Math.PI * (effectController.inclination - 0.5)
+    const phi = 2 * Math.PI * (effectController.azimuth - 0.5)
+
+    sunSphere.position.x = distance * Math.cos(phi)
+    sunSphere.position.y = distance * Math.sin(phi) * Math.sin(theta)
+    sunSphere.position.z = distance * Math.sin(phi) * Math.cos(theta)
+
+    sunSphere.visible = effectController.sun
+
+    sky.material.uniforms.sunPosition.value.copy(sunSphere.position)
+  }
+
+  onDocumentMouseMove = event => {
+    const { containerRef } = this
+    const { clientWidth: width, clientHeight: height } = containerRef
+    mouseX = (event.clientX - width / 2) / (width / 2)
+    mouseY = (event.clientY - height / 2) / (height / 2)
+    this.animate()
+  }
+
+  initKeanu = () => {
+    const { renderer, scene } = this
+
+    const roughnessMipmapper = new RoughnessMipmapper(renderer)
+    new GLTFLoader().load(keanu, gltf => {
+      gltf.scene.traverse(child => {
+        if (child.isMesh) {
+          roughnessMipmapper.generateMipmaps(child.material)
+        }
+      })
+
+      scene.add(gltf.scene)
+
+      roughnessMipmapper.dispose()
+    })
+  }
+
+  animate = () => {
+    requestAnimationFrame(this.animate)
+    this.render()
+  }
+
+  render = () => {
+    const { camera, scene, renderer } = this
+    camera.position.x = mouseX * 0.075
+    camera.position.y = 1.5 + mouseY * 0.05
+    camera.lookAt(0, 0.25, 0)
+
+    renderer.render(scene, camera)
   }
 
   /**
