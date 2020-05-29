@@ -27,7 +27,7 @@ export default function Sky(props) {
 
   const [{ offset }, set] = useSpring(() => ({
     offset: 0,
-    config: { mass: 25, tension: 120, friction: 130 }
+    config: { mass: 25, tension: 120, friction: 55 }
   }))
 
   const handleOrientationChange = e => {
