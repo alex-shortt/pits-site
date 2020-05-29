@@ -53,7 +53,9 @@ export default function Landing(props) {
       <Sky
         pieceState={pieceState}
         style={{
-          transform: exit.interpolate(perc => `scale(${skyTransform(perc)})`)
+          transform: exit.interpolate(
+            perc => `translate3d(0, 0, 0) scale(${skyTransform(perc)})`
+          )
         }}
       />
       <Puzzle pieceState={pieceState} setPieceState={setPieceState} />

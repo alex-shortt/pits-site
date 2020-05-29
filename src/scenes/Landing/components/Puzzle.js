@@ -63,7 +63,7 @@ const PieceImg = styled.img.attrs({ src: missingPieceImg })`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: all 0.25s linear;
+  transition: all 0.19s linear;
   pointer-events: none;
   ${props => props.dragging && "transform: scale(1.1)"};
   ${props => props.close && "filter: brightness(1.4);"};

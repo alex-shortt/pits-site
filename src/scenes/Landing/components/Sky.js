@@ -16,6 +16,7 @@ const Container = styled(animated.div)`
   background: linear-gradient(180deg, #598ac2, #639cdf);
   filter: grayscale(${props => props.grayscale});
   transition: 0.5s ease-in-out;
+  transform: translate3d(0, 0, 0);
 `
 
 export default function Sky(props) {
