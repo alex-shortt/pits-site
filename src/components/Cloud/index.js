@@ -1,6 +1,6 @@
 import React from "react"
 import styled, { keyframes } from "styled-components/macro"
-import { Tween } from "react-gsap"
+import { animated } from "react-spring"
 
 const moveAcross = y => keyframes`
   0% { transform: translateX(0vw) translateX(-100%) translateY(-${y}%) }
@@ -18,6 +18,10 @@ const Container = styled.div`
   animation: ${props => moveAcross(props.y)} ${props => props.velocity}s linear
     infinite;
   animation-delay: ${props => props.delay}s;
+`
+
+const OffsetContainer = styled(animated.div)`
+  height: 100%;
 `
 
 const Image = styled.img.attrs(props => ({
@@ -44,7 +48,7 @@ function getLayerStyles(layer) {
   styles.filter = `brightness(${brightness})`
 
   styles.yDuration = Math.max(((20 - layer) / 20) * 1.2 + 1, 1)
-  styles.maxOffset = Math.max((layer / 20) * 40 + 20, 25)
+  styles.maxOffset = Math.max((layer / 20) * 30 + 20, 25)
   styles.xDuration = Math.max(((20 - layer) / 20) * 90 + 100, 90)
   return styles
 }
@@ -58,9 +62,15 @@ export default function Cloud(props) {
 
   return (
     <Container y={y} velocity={xDuration} delay={delay} style={styles}>
-      <Tween to={{ y: `${maxOffset * offset}px` }} duration={yDuration}>
+      <OffsetContainer
+        style={{
+          transform: offset.interpolate(
+            perc => `translateY(${maxOffset * perc}px)`
+          )
+        }}
+      >
         <Image src={image} />
-      </Tween>
+      </OffsetContainer>
     </Container>
   )
 }

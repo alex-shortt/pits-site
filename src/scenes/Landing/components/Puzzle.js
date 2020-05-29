@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components/macro"
 import { useSpring, animated } from "react-spring"
 import { useGesture } from "react-with-gesture"
@@ -34,8 +34,9 @@ const PuzzlePiece = styled(animated.div)`
   left: 50%;
   top: 50%;
   z-index: 51;
-
   cursor: pointer;
+
+  ${props => props.done && "pointer-events: none;"};
 
   & > div {
     position: relative;
@@ -75,8 +76,7 @@ const ShadowImg = styled(PieceImg)`
 `
 
 export default function Puzzle(props) {
-  // still, moving, close, done
-  const [pieceState, setPieceState] = useState("still")
+  const { pieceState, setPieceState } = props
 
   // x,y offset represented as a decimal from -0.5 to 0,5
   // offset from 0,0 being center of screen
@@ -91,7 +91,7 @@ export default function Puzzle(props) {
   })
 
   const bind = useGesture(opts => {
-    const { down, delta, velocity, previous } = opts
+    const { down, velocity, previous } = opts
 
     const newVelocity = clamp(velocity, 1, 4)
     let newX = (previous[0] - window.innerWidth / 2) / window.innerWidth
@@ -129,6 +129,7 @@ export default function Puzzle(props) {
                 window.innerWidth}px,${y * window.innerHeight}px,0)`
           )
         }}
+        done={pieceState === "done"}
       >
         <div>
           <ShadowImg
