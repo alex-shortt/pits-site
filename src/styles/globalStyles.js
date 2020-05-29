@@ -14,7 +14,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: Avenir, Lato, Roboto, sans-serif;
+    font-family: "Helvetica", sans-serif;
     overflow: auto;
     overflow-x: hidden;
   }

@@ -1,0 +1,625 @@
+{
+  "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzUyNTc1Nzg1MTI0Mjg=",
+  "availableForSale": true,
+  "createdAt": "2020-05-28T23:03:50Z",
+  "updatedAt": "2020-05-28T23:03:57Z",
+  "descriptionHtml": "Matrix Tee",
+  "description": "Matrix Tee",
+  "handle": "matrix-tee",
+  "productType": "",
+  "title": "Matrix Tee",
+  "vendor": "PuzzleInTheSky",
+  "publishedAt": "2020-05-28T23:02:53Z",
+  "onlineStoreUrl": null,
+  "options": [{
+    "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0T3B0aW9uLzY3MjIyOTY5NzEzMDg=",
+    "name": "Size",
+    "values": [{
+      "value": "S",
+      "type": {
+        "name": "String",
+        "kind": "SCALAR"
+      }
+    }, {
+      "value": "M",
+      "type": {
+        "name": "String",
+        "kind": "SCALAR"
+      }
+    }, {
+      "value": "L",
+      "type": {
+        "name": "String",
+        "kind": "SCALAR"
+      }
+    }, {
+      "value": "XL",
+      "type": {
+        "name": "String",
+        "kind": "SCALAR"
+      }
+    }],
+    "type": {
+      "name": "ProductOption",
+      "kind": "OBJECT",
+      "fieldBaseTypes": {
+        "name": "String",
+        "values": "String"
+      },
+      "implementsNode": true
+    }
+  }],
+  "images": [{
+    "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTY0OTczOTkwMDUyMjg=",
+    "src": "https://cdn.shopify.com/s/files/1/0390/4130/2572/products/ezgif-2-5e922fd84247.gif?v=1590707037",
+    "altText": null,
+    "type": {
+      "name": "Image",
+      "kind": "OBJECT",
+      "fieldBaseTypes": {
+        "altText": "String",
+        "id": "ID",
+        "originalSrc": "URL",
+        "src": "URL"
+      },
+      "implementsNode": false
+    },
+    "hasNextPage": false,
+    "hasPreviousPage": false,
+    "variableValues": {
+      "first": 20
+    }
+  }],
+  "variants": [{
+    "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDI1NDA1ODk0NjYwNA==",
+    "title": "S",
+    "price": "38.88",
+    "priceV2": {
+      "amount": "38.88",
+      "currencyCode": "USD",
+      "type": {
+        "name": "MoneyV2",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "amount": "Decimal",
+          "currencyCode": "CurrencyCode"
+        },
+        "implementsNode": false
+      }
+    },
+    "presentmentPrices": [{
+      "price": {
+        "amount": "38.88",
+        "currencyCode": "USD",
+        "type": {
+          "name": "MoneyV2",
+          "kind": "OBJECT",
+          "fieldBaseTypes": {
+            "amount": "Decimal",
+            "currencyCode": "CurrencyCode"
+          },
+          "implementsNode": false
+        }
+      },
+      "compareAtPrice": null,
+      "type": {
+        "name": "ProductVariantPricePair",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "compareAtPrice": "MoneyV2",
+          "price": "MoneyV2"
+        },
+        "implementsNode": false
+      },
+      "hasNextPage": false,
+      "hasPreviousPage": false,
+      "variableValues": {
+        "first": 20
+      }
+    }],
+    "weight": 0,
+    "available": true,
+    "sku": "matrix-tee-s",
+    "compareAtPrice": null,
+    "compareAtPriceV2": null,
+    "image": {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTY0OTczOTkwMDUyMjg=",
+      "src": "https://cdn.shopify.com/s/files/1/0390/4130/2572/products/ezgif-2-5e922fd84247.gif?v=1590707037",
+      "altText": null,
+      "type": {
+        "name": "Image",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "altText": "String",
+          "id": "ID",
+          "originalSrc": "URL",
+          "src": "URL"
+        },
+        "implementsNode": false
+      }
+    },
+    "selectedOptions": [{
+      "name": "Size",
+      "value": "S",
+      "type": {
+        "name": "SelectedOption",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "name": "String",
+          "value": "String"
+        },
+        "implementsNode": false
+      }
+    }],
+    "unitPrice": null,
+    "unitPriceMeasurement": {
+      "measuredType": null,
+      "quantityUnit": null,
+      "quantityValue": 0,
+      "referenceUnit": null,
+      "referenceValue": 0,
+      "type": {
+        "name": "UnitPriceMeasurement",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "measuredType": "UnitPriceMeasurementMeasuredType",
+          "quantityUnit": "UnitPriceMeasurementMeasuredUnit",
+          "quantityValue": "Float",
+          "referenceUnit": "UnitPriceMeasurementMeasuredUnit",
+          "referenceValue": "Int"
+        },
+        "implementsNode": false
+      }
+    },
+    "type": {
+      "name": "ProductVariant",
+      "kind": "OBJECT",
+      "fieldBaseTypes": {
+        "availableForSale": "Boolean",
+        "compareAtPrice": "Money",
+        "compareAtPriceV2": "MoneyV2",
+        "id": "ID",
+        "image": "Image",
+        "presentmentPrices": "ProductVariantPricePairConnection",
+        "price": "Money",
+        "priceV2": "MoneyV2",
+        "product": "Product",
+        "selectedOptions": "SelectedOption",
+        "sku": "String",
+        "title": "String",
+        "unitPrice": "MoneyV2",
+        "unitPriceMeasurement": "UnitPriceMeasurement",
+        "weight": "Float"
+      },
+      "implementsNode": true
+    },
+    "hasNextPage": {
+      "value": true
+    },
+    "hasPreviousPage": false,
+    "variableValues": {
+      "first": 20
+    }
+  }, {
+    "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDI1NDA1ODk3OTM3Mg==",
+    "title": "M",
+    "price": "38.88",
+    "priceV2": {
+      "amount": "38.88",
+      "currencyCode": "USD",
+      "type": {
+        "name": "MoneyV2",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "amount": "Decimal",
+          "currencyCode": "CurrencyCode"
+        },
+        "implementsNode": false
+      }
+    },
+    "presentmentPrices": [{
+      "price": {
+        "amount": "38.88",
+        "currencyCode": "USD",
+        "type": {
+          "name": "MoneyV2",
+          "kind": "OBJECT",
+          "fieldBaseTypes": {
+            "amount": "Decimal",
+            "currencyCode": "CurrencyCode"
+          },
+          "implementsNode": false
+        }
+      },
+      "compareAtPrice": null,
+      "type": {
+        "name": "ProductVariantPricePair",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "compareAtPrice": "MoneyV2",
+          "price": "MoneyV2"
+        },
+        "implementsNode": false
+      },
+      "hasNextPage": false,
+      "hasPreviousPage": false,
+      "variableValues": {
+        "first": 20
+      }
+    }],
+    "weight": 0,
+    "available": true,
+    "sku": "matrix-tee-m",
+    "compareAtPrice": null,
+    "compareAtPriceV2": null,
+    "image": {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTY0OTczOTkwMDUyMjg=",
+      "src": "https://cdn.shopify.com/s/files/1/0390/4130/2572/products/ezgif-2-5e922fd84247.gif?v=1590707037",
+      "altText": null,
+      "type": {
+        "name": "Image",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "altText": "String",
+          "id": "ID",
+          "originalSrc": "URL",
+          "src": "URL"
+        },
+        "implementsNode": false
+      }
+    },
+    "selectedOptions": [{
+      "name": "Size",
+      "value": "M",
+      "type": {
+        "name": "SelectedOption",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "name": "String",
+          "value": "String"
+        },
+        "implementsNode": false
+      }
+    }],
+    "unitPrice": null,
+    "unitPriceMeasurement": {
+      "measuredType": null,
+      "quantityUnit": null,
+      "quantityValue": 0,
+      "referenceUnit": null,
+      "referenceValue": 0,
+      "type": {
+        "name": "UnitPriceMeasurement",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "measuredType": "UnitPriceMeasurementMeasuredType",
+          "quantityUnit": "UnitPriceMeasurementMeasuredUnit",
+          "quantityValue": "Float",
+          "referenceUnit": "UnitPriceMeasurementMeasuredUnit",
+          "referenceValue": "Int"
+        },
+        "implementsNode": false
+      }
+    },
+    "type": {
+      "name": "ProductVariant",
+      "kind": "OBJECT",
+      "fieldBaseTypes": {
+        "availableForSale": "Boolean",
+        "compareAtPrice": "Money",
+        "compareAtPriceV2": "MoneyV2",
+        "id": "ID",
+        "image": "Image",
+        "presentmentPrices": "ProductVariantPricePairConnection",
+        "price": "Money",
+        "priceV2": "MoneyV2",
+        "product": "Product",
+        "selectedOptions": "SelectedOption",
+        "sku": "String",
+        "title": "String",
+        "unitPrice": "MoneyV2",
+        "unitPriceMeasurement": "UnitPriceMeasurement",
+        "weight": "Float"
+      },
+      "implementsNode": true
+    },
+    "hasNextPage": {
+      "value": true
+    },
+    "hasPreviousPage": {
+      "value": true
+    },
+    "variableValues": {
+      "first": 20
+    }
+  }, {
+    "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDI1NDA1OTAxMjE0MA==",
+    "title": "L",
+    "price": "38.88",
+    "priceV2": {
+      "amount": "38.88",
+      "currencyCode": "USD",
+      "type": {
+        "name": "MoneyV2",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "amount": "Decimal",
+          "currencyCode": "CurrencyCode"
+        },
+        "implementsNode": false
+      }
+    },
+    "presentmentPrices": [{
+      "price": {
+        "amount": "38.88",
+        "currencyCode": "USD",
+        "type": {
+          "name": "MoneyV2",
+          "kind": "OBJECT",
+          "fieldBaseTypes": {
+            "amount": "Decimal",
+            "currencyCode": "CurrencyCode"
+          },
+          "implementsNode": false
+        }
+      },
+      "compareAtPrice": null,
+      "type": {
+        "name": "ProductVariantPricePair",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "compareAtPrice": "MoneyV2",
+          "price": "MoneyV2"
+        },
+        "implementsNode": false
+      },
+      "hasNextPage": false,
+      "hasPreviousPage": false,
+      "variableValues": {
+        "first": 20
+      }
+    }],
+    "weight": 0,
+    "available": true,
+    "sku": "matrix-tee-l",
+    "compareAtPrice": null,
+    "compareAtPriceV2": null,
+    "image": {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTY0OTczOTkwMDUyMjg=",
+      "src": "https://cdn.shopify.com/s/files/1/0390/4130/2572/products/ezgif-2-5e922fd84247.gif?v=1590707037",
+      "altText": null,
+      "type": {
+        "name": "Image",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "altText": "String",
+          "id": "ID",
+          "originalSrc": "URL",
+          "src": "URL"
+        },
+        "implementsNode": false
+      }
+    },
+    "selectedOptions": [{
+      "name": "Size",
+      "value": "L",
+      "type": {
+        "name": "SelectedOption",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "name": "String",
+          "value": "String"
+        },
+        "implementsNode": false
+      }
+    }],
+    "unitPrice": null,
+    "unitPriceMeasurement": {
+      "measuredType": null,
+      "quantityUnit": null,
+      "quantityValue": 0,
+      "referenceUnit": null,
+      "referenceValue": 0,
+      "type": {
+        "name": "UnitPriceMeasurement",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "measuredType": "UnitPriceMeasurementMeasuredType",
+          "quantityUnit": "UnitPriceMeasurementMeasuredUnit",
+          "quantityValue": "Float",
+          "referenceUnit": "UnitPriceMeasurementMeasuredUnit",
+          "referenceValue": "Int"
+        },
+        "implementsNode": false
+      }
+    },
+    "type": {
+      "name": "ProductVariant",
+      "kind": "OBJECT",
+      "fieldBaseTypes": {
+        "availableForSale": "Boolean",
+        "compareAtPrice": "Money",
+        "compareAtPriceV2": "MoneyV2",
+        "id": "ID",
+        "image": "Image",
+        "presentmentPrices": "ProductVariantPricePairConnection",
+        "price": "Money",
+        "priceV2": "MoneyV2",
+        "product": "Product",
+        "selectedOptions": "SelectedOption",
+        "sku": "String",
+        "title": "String",
+        "unitPrice": "MoneyV2",
+        "unitPriceMeasurement": "UnitPriceMeasurement",
+        "weight": "Float"
+      },
+      "implementsNode": true
+    },
+    "hasNextPage": {
+      "value": true
+    },
+    "hasPreviousPage": {
+      "value": true
+    },
+    "variableValues": {
+      "first": 20
+    }
+  }, {
+    "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zNDI1NDA1OTA0NDkwOA==",
+    "title": "XL",
+    "price": "38.88",
+    "priceV2": {
+      "amount": "38.88",
+      "currencyCode": "USD",
+      "type": {
+        "name": "MoneyV2",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "amount": "Decimal",
+          "currencyCode": "CurrencyCode"
+        },
+        "implementsNode": false
+      }
+    },
+    "presentmentPrices": [{
+      "price": {
+        "amount": "38.88",
+        "currencyCode": "USD",
+        "type": {
+          "name": "MoneyV2",
+          "kind": "OBJECT",
+          "fieldBaseTypes": {
+            "amount": "Decimal",
+            "currencyCode": "CurrencyCode"
+          },
+          "implementsNode": false
+        }
+      },
+      "compareAtPrice": null,
+      "type": {
+        "name": "ProductVariantPricePair",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "compareAtPrice": "MoneyV2",
+          "price": "MoneyV2"
+        },
+        "implementsNode": false
+      },
+      "hasNextPage": false,
+      "hasPreviousPage": false,
+      "variableValues": {
+        "first": 20
+      }
+    }],
+    "weight": 0,
+    "available": true,
+    "sku": "matrix-tee-xl",
+    "compareAtPrice": null,
+    "compareAtPriceV2": null,
+    "image": {
+      "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0SW1hZ2UvMTY0OTczOTkwMDUyMjg=",
+      "src": "https://cdn.shopify.com/s/files/1/0390/4130/2572/products/ezgif-2-5e922fd84247.gif?v=1590707037",
+      "altText": null,
+      "type": {
+        "name": "Image",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "altText": "String",
+          "id": "ID",
+          "originalSrc": "URL",
+          "src": "URL"
+        },
+        "implementsNode": false
+      }
+    },
+    "selectedOptions": [{
+      "name": "Size",
+      "value": "XL",
+      "type": {
+        "name": "SelectedOption",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "name": "String",
+          "value": "String"
+        },
+        "implementsNode": false
+      }
+    }],
+    "unitPrice": null,
+    "unitPriceMeasurement": {
+      "measuredType": null,
+      "quantityUnit": null,
+      "quantityValue": 0,
+      "referenceUnit": null,
+      "referenceValue": 0,
+      "type": {
+        "name": "UnitPriceMeasurement",
+        "kind": "OBJECT",
+        "fieldBaseTypes": {
+          "measuredType": "UnitPriceMeasurementMeasuredType",
+          "quantityUnit": "UnitPriceMeasurementMeasuredUnit",
+          "quantityValue": "Float",
+          "referenceUnit": "UnitPriceMeasurementMeasuredUnit",
+          "referenceValue": "Int"
+        },
+        "implementsNode": false
+      }
+    },
+    "type": {
+      "name": "ProductVariant",
+      "kind": "OBJECT",
+      "fieldBaseTypes": {
+        "availableForSale": "Boolean",
+        "compareAtPrice": "Money",
+        "compareAtPriceV2": "MoneyV2",
+        "id": "ID",
+        "image": "Image",
+        "presentmentPrices": "ProductVariantPricePairConnection",
+        "price": "Money",
+        "priceV2": "MoneyV2",
+        "product": "Product",
+        "selectedOptions": "SelectedOption",
+        "sku": "String",
+        "title": "String",
+        "unitPrice": "MoneyV2",
+        "unitPriceMeasurement": "UnitPriceMeasurement",
+        "weight": "Float"
+      },
+      "implementsNode": true
+    },
+    "hasNextPage": false,
+    "hasPreviousPage": {
+      "value": true
+    },
+    "variableValues": {
+      "first": 20
+    }
+  }],
+  "type": {
+    "name": "Product",
+    "kind": "OBJECT",
+    "fieldBaseTypes": {
+      "availableForSale": "Boolean",
+      "createdAt": "DateTime",
+      "description": "String",
+      "descriptionHtml": "HTML",
+      "handle": "String",
+      "id": "ID",
+      "images": "ImageConnection",
+      "onlineStoreUrl": "URL",
+      "options": "ProductOption",
+      "productType": "String",
+      "publishedAt": "DateTime",
+      "title": "String",
+      "updatedAt": "DateTime",
+      "variants": "ProductVariantConnection",
+      "vendor": "String"
+    },
+    "implementsNode": true
+  },
+  "hasNextPage": false,
+  "hasPreviousPage": false,
+  "variableValues": {
+    "first": 20
+  }
+}

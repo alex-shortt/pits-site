@@ -7,10 +7,10 @@ import FullScreenLoading from "components/FullScreenLoading"
 import ScrollToTop from "components/ScrollToTop"
 import GA from "services/ga"
 import { ShopifyProvider } from "services/shopify"
-
-import Cart from "./components/Cart"
+import Cart from "components/Cart"
 
 const Landing = React.lazy(() => import("scenes/Landing"))
+const Keanu = React.lazy(() => import("scenes/Keanu"))
 const Product = React.lazy(() => import("scenes/Product"))
 
 const GoogleAnalytics = () => {
@@ -30,6 +30,7 @@ export default function App() {
           <ScrollToTop>
             <Switch>
               <Route path="/" exact component={Landing} />
+              <Route path="/keanu" exact component={Keanu} />
               <Route path="/:handle" component={Product} />
               {/* TODO: 404 Page */}
             </Switch>

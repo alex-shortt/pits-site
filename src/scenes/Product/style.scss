@@ -1,0 +1,171 @@
+// peter campanelli 2020 - this line required to compile
+@import "../../../node_modules/normalize-scss/sass/normalize/import-now";
+@mixin phones {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin text {
+  font-family: "Helvetica", Helvetica, sans-serif;
+  color: white;
+  text-shadow: 3px 3px 5px rgba(50, 50, 50, 0.5);
+  font-weight: bold;
+
+  &::selection {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+$header-height: 150px;
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+  border-radius: 0;
+  text-align: inherit;
+  /* Remove excess padding and border in Firefox 4+ */
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.pp {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  &-loading {
+    justify-content: center;
+
+    &-text {
+      @include text();
+    }
+  }
+
+  &-header {
+    height: #{$header-height};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-text {
+      padding: 0;
+      margin: 0;
+      font-size: 55px;
+      transform: scaleX(1.5);
+      user-select: none;
+      @include text();
+    }
+  }
+
+  &-product {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 95%;
+    max-width: 800px;
+
+    &-image {
+      height: 100%;
+
+      &-wrap {
+        height: 75%;
+        width: 100%;
+        display: flex;
+        margin-bottom: 30px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 25px 0;
+      }
+    }
+
+    &-info {
+      height: 25%;
+      width: 90%;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      &-price {
+        font-size: 40px;
+        @include text();
+      }
+
+      &-size {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &-button {
+          @include text();
+          font-size: 20px;
+          border: 4px solid transparent;
+          padding: 0 5px;
+
+          &-selected {
+            border: 4px solid white;
+          }
+        }
+      }
+
+      &-add-to-cart {
+        margin-top: 20px;
+        background-color: #385ec5;
+        border-radius: 5px;
+        font-size: 15px;
+        height: 32px;
+        text-align: center;
+        color: white;
+        width: 100%;
+        padding: 5px 0;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &:hover {
+          background-color: #001279;
+        }
+      }
+    }
+  }
+
+  &-cr {
+    @include text();
+  }
+
+  &-cart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+
+    &-image {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
