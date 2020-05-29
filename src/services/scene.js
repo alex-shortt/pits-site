@@ -4,7 +4,7 @@ import { Sky } from "three/examples/jsm/objects/Sky"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { RoughnessMipmapper } from "three/examples/jsm/utils/RoughnessMipmapper"
 
-import keanu from "../models/keanu/keanu2.glb"
+import keanuModel from "../models/keanu/keanu2.glb"
 
 let mouseX
 let mouseY
@@ -127,13 +127,38 @@ export class ThreeScene {
 
     mouseX = (event.clientX - width / 2) / (width / 2)
     mouseY = (event.clientY - height / 2) / (height / 2)
+
+    const { helper, mouse, renderer, camera, keanu, raycaster } = this
+
+    if (!mouse || !helper || !renderer || !camera || !raycaster) {
+      console.log("asdflkj")
+      return
+    }
+
+    const keanuHimself = keanu.children[0].children[0].children[0]
+
+    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1
+    mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1
+    raycaster.setFromCamera(mouse, camera)
+
+    let found = false
+
+    for (let i = 0; i < keanuHimself.children.length; i += 1) {
+      const intersects = raycaster.intersectObject(keanuHimself.children[i])
+      if (intersects.length > 0) {
+        found = true
+        break
+      }
+    }
+
+    console.log(found)
   }
 
   initKeanu = () => {
     const { renderer, scene } = this
 
     const roughnessMipmapper = new RoughnessMipmapper(renderer)
-    new GLTFLoader().load(keanu, gltf => {
+    new GLTFLoader().load(keanuModel, gltf => {
       gltf.scene.traverse(child => {
         if (child.isMesh) {
           roughnessMipmapper.generateMipmaps(child.material)
@@ -143,14 +168,33 @@ export class ThreeScene {
       scene.add(gltf.scene)
 
       roughnessMipmapper.dispose()
+
+      // for raycasting
+      const mouse = new THREE.Vector2()
+      const raycaster = new THREE.Raycaster()
+
+      // exports
+      this.keanu = gltf.scene
+      this.raycaster = raycaster
+      this.mouse = mouse
+      console.log(gltf.scene)
     })
+
+    const geometry = new THREE.ConeBufferGeometry(20, 100, 3)
+    geometry.translate(0, 50, 0)
+    geometry.rotateX(Math.PI / 2)
+    this.helper = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial())
+    scene.add(this.helper)
   }
 
   startAnimationLoop = () => {
-    const { stats } = this
+    const { stats, keanu } = this
 
     stats.begin()
     this.render()
+    if (keanu) {
+      keanu.rotation.y += 0.003
+    }
     stats.end()
 
     this.requestID = requestAnimationFrame(this.startAnimationLoop)
@@ -159,9 +203,9 @@ export class ThreeScene {
   render = () => {
     const { camera, scene, renderer } = this
 
-    camera.position.x = mouseX * 0.35
-    camera.position.y = 1.2 + mouseY * 0.1
-    camera.lookAt(0, 0.25, 0)
+    // camera.position.x = mouseX * 0.35
+    camera.position.y = 1 + mouseY * -0.1
+    camera.lookAt(0, 0.35, 0)
 
     renderer.render(scene, camera)
   }
