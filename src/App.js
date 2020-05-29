@@ -9,6 +9,7 @@ import GA from "services/ga"
 import { ShopifyProvider } from "services/shopify"
 import Cart from "components/Cart"
 
+const Landing = React.lazy(() => import("scenes/Landing"))
 const Keanu = React.lazy(() => import("scenes/Keanu"))
 const Product = React.lazy(() => import("scenes/Product"))
 
@@ -28,6 +29,7 @@ export default function App() {
           <GoogleAnalytics />
           <ScrollToTop>
             <Switch>
+              <Route path="/" exact component={Landing} />
               <Route path="/keanu" exact component={Keanu} />
               <Route path="/:handle" component={Product} />
               {/* TODO: 404 Page */}
