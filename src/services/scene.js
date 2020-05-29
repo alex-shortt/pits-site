@@ -128,10 +128,9 @@ export class ThreeScene {
     mouseX = (event.clientX - width / 2) / (width / 2)
     mouseY = (event.clientY - height / 2) / (height / 2)
 
-    const { helper, mouse, renderer, camera, keanu, raycaster } = this
+    const { mouse, renderer, camera, keanu, raycaster } = this
 
-    if (!mouse || !helper || !renderer || !camera || !raycaster) {
-      console.log("asdflkj")
+    if (!mouse || !renderer || !camera || !raycaster) {
       return
     }
 
@@ -183,8 +182,6 @@ export class ThreeScene {
     const geometry = new THREE.ConeBufferGeometry(20, 100, 3)
     geometry.translate(0, 50, 0)
     geometry.rotateX(Math.PI / 2)
-    this.helper = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial())
-    scene.add(this.helper)
   }
 
   startAnimationLoop = () => {
