@@ -24,6 +24,8 @@ const wrapperTransform = perc =>
 const skyTransform = perc => 1 + perc * 2
 
 export default function Landing(props) {
+  const { history } = props
+
   // still, moving, close, done
   const [pieceState, setPieceState] = useState("still")
 
@@ -36,6 +38,10 @@ export default function Landing(props) {
     if (pieceState === "done") {
       setTimeout(() => {
         set({ exit: 1 })
+
+        setTimeout(() => {
+          history.push("/keanu")
+        }, 3500)
       }, 750)
     }
   })
