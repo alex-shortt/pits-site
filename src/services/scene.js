@@ -17,21 +17,21 @@ export class ThreeScene {
     mouseX = 0
     mouseY = 0
     // camera
-    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000)
-    camera.position.set(0, 1.5, 1)
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 2000)
+    camera.position.set(0, 1.2, 0.8)
     camera.rotation.set(315, 0, 0)
     camera.lookAt(0, 0.25, 0)
 
     // scene
     const scene = new THREE.Scene()
-    const ambientLight = new THREE.AmbientLight(0xcccccc, 2)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2)
     scene.add(ambientLight)
 
     // light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+    const directionalLight = new THREE.PointLight(0xffffff, 1.5)
     directionalLight.position.x = 0
-    directionalLight.position.y = 10
-    directionalLight.position.z = 10
+    directionalLight.position.y = 2
+    directionalLight.position.z = 0
     scene.add(directionalLight)
     scene.add(camera)
 
@@ -57,7 +57,7 @@ export class ThreeScene {
     document.addEventListener("mousemove", this.onDocumentMouseMove, false)
 
     this.render()
-  }
+  };
 
   handleWindowResize = () => {
     const { containerRef, renderer, camera } = this
@@ -70,7 +70,7 @@ export class ThreeScene {
     // camera
     camera.aspect = width / height
     camera.updateProjectionMatrix()
-  }
+  };
 
   initSky = () => {
     const { scene } = this
@@ -104,7 +104,8 @@ export class ThreeScene {
 
     sky.material.uniforms.turbidity.value = effectController.turbidity
     sky.material.uniforms.rayleigh.value = effectController.rayleigh
-    sky.material.uniforms.mieCoefficient.value = effectController.mieCoefficient
+    sky.material.uniforms.mieCoefficient.value =
+      effectController.mieCoefficient
     sky.material.uniforms.mieDirectionalG.value =
       effectController.mieDirectionalG
     sky.material.uniforms.luminance.value = effectController.luminance
@@ -119,7 +120,7 @@ export class ThreeScene {
     sunSphere.visible = effectController.sun
 
     sky.material.uniforms.sunPosition.value.copy(sunSphere.position)
-  }
+  };
 
   onDocumentMouseMove = event => {
     const { containerRef } = this
@@ -127,7 +128,7 @@ export class ThreeScene {
 
     mouseX = (event.clientX - width / 2) / (width / 2)
     mouseY = (event.clientY - height / 2) / (height / 2)
-  }
+  };
 
   initKeanu = () => {
     const { renderer, scene } = this
@@ -143,8 +144,8 @@ export class ThreeScene {
       scene.add(gltf.scene)
 
       roughnessMipmapper.dispose()
-    })
-  }
+    });
+  };
 
   startAnimationLoop = () => {
     const { stats } = this
@@ -154,17 +155,17 @@ export class ThreeScene {
     stats.end()
 
     this.requestID = requestAnimationFrame(this.startAnimationLoop)
-  }
+  };
 
   render = () => {
     const { camera, scene, renderer } = this
 
-    camera.position.x = mouseX * 0.075
-    camera.position.y = 1.5 + mouseY * 0.05
+    camera.position.x = mouseX * 0.35
+    camera.position.y = 1.2 + mouseY * 0.1
     camera.lookAt(0, 0.25, 0)
 
     renderer.render(scene, camera)
-  }
+  };
 
   /**
    * To be called when you leave the page
@@ -175,5 +176,5 @@ export class ThreeScene {
     window.removeEventListener("resize", this.handleWindowResize)
     window.cancelAnimationFrame(requestID)
     controls.dispose()
-  }
+  };
 }

@@ -1,19 +1,11 @@
-import React, { useContext } from "react"
-import styled from "styled-components"
+import React, { useContext, useState, useCallback } from "react"
 import { Link } from "react-router-dom"
+import Div100vh from "react-div-100vh"
 
 import { ShopifyContext } from "services/shopify"
 
-const LoadingText = styled.h1`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
-const Container = styled.div`
-  width: 100%;
-`
+import "./style.min.css"
+import nf from "../../img/notfound.png"
 
 export default function Product(props) {
   const {
@@ -22,36 +14,105 @@ export default function Product(props) {
     }
   } = props
 
-  const shopify = useContext(ShopifyContext)
+  const {
+    client,
+    products,
+    checkout,
+    setCheckout,
+    setCheckoutOpen
+  } = useContext(ShopifyContext)
 
-  const { products, setCheckoutOpen } = shopify
+  const [currVariant, setVariant] = useState(0)
 
-  if (!shopify.products) {
-    return <LoadingText>Loading...</LoadingText>
-  }
+  const addtoCheckout = useCallback(
+    itemId => {
+      if (!checkout) {
+        client.checkout.create().then(newCheckout => {
+          setCheckout(newCheckout)
+        })
+      }
+      const checkoutId = checkout.id
 
-  const product = shopify.products.find(prod => prod.handle === handle)
+      client.checkout.addLineItems(checkoutId, itemId).then(newCheckout => {
+        setCheckout(newCheckout)
+      })
+    },
+    [client, checkout, setCheckout]
+  )
 
-  if (!product) {
+  if (!products) {
     return (
-      <LoadingText>
-        We couldn't find the product you're looking for...
-        <br />
-        <br />
-        <Link to="/">Return to Shop</Link>
-      </LoadingText>
+      <Div100vh className="pp pp-loading">
+        <h1 className="pp-loading-text">Loading...</h1>
+      </Div100vh>
     )
   }
 
+  const product = products.find(prod => prod.handle === handle)
+
+  if (!product) {
+    return (
+      <Div100vh className="pp pp-loading">
+        <h1 className="pp-loading-text">
+          We couldn't find the product you're looking for...
+        </h1>
+        <Link to="/">Home</Link>
+      </Div100vh>
+    )
+  }
+
+  const sizes = product.variants.map((variant, index) => (
+    <button
+      type="button"
+      className={`pp-product-info-size-button ${
+        currVariant === index ? "pp-product-info-size-button-selected" : ""
+      }`}
+      onClick={() => setVariant(index)}
+    >
+      {variant.title}
+    </button>
+  ))
+
   return (
-    <Container>
-      <button type="submit" onClick={() => setCheckoutOpen(true)}>
+    <Div100vh className="pp">
+      <div className="pp-header">
+        <h1 className="pp-header-text">SKY WORLDWIDE</h1>
+      </div>
+      <div className="pp-product">
+        <div className="pp-product-image-wrap">
+          <img
+            src={
+              product.variants[currVariant].image
+                ? product.variants[currVariant].image.src
+                : nf
+            }
+            alt={product.title}
+            draggable={false}
+            className="pp-product-image"
+          />
+        </div>
+        <div className="pp-product-info">
+          <div className="pp-product-info-price">
+            ${product.variants[currVariant].price}
+          </div>
+          <div className="pp-product-info-size">{sizes}</div>
+          <button
+            className="pp-product-info-add-to-cart"
+            type="submit"
+            onClick={addtoCheckout(product.variants[currVariant].id)}
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+      <p className="pp-cr">&copy;PUZZLE IN THE SKY LLC | ALL RIGHTS RESERVED</p>
+      <button
+        className="pp-cart"
+        type="submit"
+        onClick={() => setCheckoutOpen(true)}
+      >
         open cart
       </button>
-      <br />
-      <br />
-      <br />
-      {JSON.stringify(product)}
-    </Container>
+    </Div100vh>
   )
 }
