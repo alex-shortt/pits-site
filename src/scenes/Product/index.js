@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import Div100vh from "react-div-100vh"
 
 import { ShopifyContext } from "services/shopify"
+import nf from "assets/img/notfound.png"
 
 import "./style.min.css"
-import nf from "../../img/notfound.png"
 
 export default function Product(props) {
   const {
@@ -22,23 +22,21 @@ export default function Product(props) {
     setCheckoutOpen
   } = useContext(ShopifyContext)
 
-  const [currVariant, setVariant] = useState(0)
+  const [curVariantId, setVariantId] = useState(null)
 
-  const addtoCheckout = useCallback(
-    itemId => {
-      if (!checkout) {
-        client.checkout.create().then(newCheckout => {
-          setCheckout(newCheckout)
-        })
-      }
-      const checkoutId = checkout.id
+  const addToCheckout = useCallback(async () => {
+    if (!curVariantId) {
+      return
+    }
 
-      client.checkout.addLineItems(checkoutId, itemId).then(newCheckout => {
-        setCheckout(newCheckout)
-      })
-    },
-    [client, checkout, setCheckout]
-  )
+    const lineItemsToAdd = { variantId: curVariantId, quantity: 1 }
+    const newCheckout = await client.checkout.addLineItems(
+      checkout.id,
+      lineItemsToAdd
+    )
+    setCheckout(newCheckout)
+    setCheckoutOpen("true")
+  })
 
   if (!products) {
     return (
@@ -65,9 +63,12 @@ export default function Product(props) {
     <button
       type="button"
       className={`pp-product-info-size-button ${
-        currVariant === index ? "pp-product-info-size-button-selected" : ""
+        curVariantId === variant.id
+          ? "pp-product-info-size-button-selected"
+          : ""
       }`}
-      onClick={() => setVariant(index)}
+      key={variant.id}
+      onClick={() => setVariantId(variant.id)}
     >
       {variant.title}
     </button>
@@ -81,11 +82,7 @@ export default function Product(props) {
       <div className="pp-product">
         <div className="pp-product-image-wrap">
           <img
-            src={
-              product.variants[currVariant].image
-                ? product.variants[currVariant].image.src
-                : nf
-            }
+            src={product.variants[0].image ? product.variants[0].image.src : nf}
             alt={product.title}
             draggable={false}
             className="pp-product-image"
@@ -93,13 +90,13 @@ export default function Product(props) {
         </div>
         <div className="pp-product-info">
           <div className="pp-product-info-price">
-            ${product.variants[currVariant].price}
+            ${product.variants[0].price}
           </div>
           <div className="pp-product-info-size">{sizes}</div>
           <button
             className="pp-product-info-add-to-cart"
             type="submit"
-            onClick={addtoCheckout(product.variants[currVariant].id)}
+            onClick={() => addToCheckout()}
           >
             Add to Cart
           </button>

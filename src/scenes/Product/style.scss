@@ -6,14 +6,14 @@
   }
 }
 @mixin text {
-  font-family: 'Helvetica', Helvetica, sans-serif;
+  font-family: "Helvetica", Helvetica, sans-serif;
   color: white;
   text-shadow: 3px 3px 5px rgba(50, 50, 50, 0.5);
   font-weight: bold;
 
   &::selection {
     color: white;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }
 $header-height: 150px;
@@ -21,7 +21,7 @@ $header-height: 150px;
 body {
   margin: 0;
   height: 100%;
-  background: url('../../img/background.jpg') center center no-repeat;
+  background: url("assets/img/background.jpg") center center no-repeat;
   background-size: cover;
   overflow: hidden;
 }
@@ -63,7 +63,7 @@ button {
     justify-content: center;
 
     &-text {
-      @include text()
+      @include text();
     }
   }
 
@@ -151,6 +151,7 @@ button {
         color: white;
         width: 100%;
         padding: 5px 0;
+        cursor: pointer;
 
         &:hover {
           background-color: #001279;
