@@ -72,7 +72,14 @@ const ShadowImg = styled(PieceImg)`
 
 export default function Puzzle(props) {
   // x,y offset
-  const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }))
+  const [{ xy }, set] = useSpring(() => {
+    const startX = (Math.random() - 0.5) * 0.6 + 0.15
+    const startY = (Math.random() - 0.5) * 0.6 + 0.15
+
+    return {
+      xy: [startX * window.innerWidth, startY * window.innerHeight]
+    }
+  })
 
   const bind = useGesture(opts => {
     const { down, delta, velocity, previous } = opts
