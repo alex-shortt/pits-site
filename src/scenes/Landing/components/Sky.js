@@ -14,6 +14,7 @@ const Container = styled.div`
   height: 100%;
   position: absolute;
   background: linear-gradient(180deg, #598ac2, #639cdf);
+  filter: grayscale(1);
 `
 
 export default function Sky(props) {

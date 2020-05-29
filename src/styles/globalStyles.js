@@ -8,6 +8,9 @@ export default createGlobalStyle`
   body, html, #root {
     height: 100%;
     width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+        position: relative;
   }
 
   body {
