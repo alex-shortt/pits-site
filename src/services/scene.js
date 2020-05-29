@@ -57,7 +57,7 @@ export class ThreeScene {
     document.addEventListener("mousemove", this.onDocumentMouseMove, false)
 
     this.render()
-  };
+  }
 
   handleWindowResize = () => {
     const { containerRef, renderer, camera } = this
@@ -70,7 +70,7 @@ export class ThreeScene {
     // camera
     camera.aspect = width / height
     camera.updateProjectionMatrix()
-  };
+  }
 
   initSky = () => {
     const { scene } = this
@@ -104,8 +104,7 @@ export class ThreeScene {
 
     sky.material.uniforms.turbidity.value = effectController.turbidity
     sky.material.uniforms.rayleigh.value = effectController.rayleigh
-    sky.material.uniforms.mieCoefficient.value =
-      effectController.mieCoefficient
+    sky.material.uniforms.mieCoefficient.value = effectController.mieCoefficient
     sky.material.uniforms.mieDirectionalG.value =
       effectController.mieDirectionalG
     sky.material.uniforms.luminance.value = effectController.luminance
@@ -120,7 +119,7 @@ export class ThreeScene {
     sunSphere.visible = effectController.sun
 
     sky.material.uniforms.sunPosition.value.copy(sunSphere.position)
-  };
+  }
 
   onDocumentMouseMove = event => {
     const { containerRef } = this
@@ -128,7 +127,7 @@ export class ThreeScene {
 
     mouseX = (event.clientX - width / 2) / (width / 2)
     mouseY = (event.clientY - height / 2) / (height / 2)
-  };
+  }
 
   initKeanu = () => {
     const { renderer, scene } = this
@@ -144,8 +143,8 @@ export class ThreeScene {
       scene.add(gltf.scene)
 
       roughnessMipmapper.dispose()
-    });
-  };
+    })
+  }
 
   startAnimationLoop = () => {
     const { stats } = this
@@ -155,7 +154,7 @@ export class ThreeScene {
     stats.end()
 
     this.requestID = requestAnimationFrame(this.startAnimationLoop)
-  };
+  }
 
   render = () => {
     const { camera, scene, renderer } = this
@@ -165,7 +164,7 @@ export class ThreeScene {
     camera.lookAt(0, 0.25, 0)
 
     renderer.render(scene, camera)
-  };
+  }
 
   /**
    * To be called when you leave the page
@@ -176,5 +175,5 @@ export class ThreeScene {
     window.removeEventListener("resize", this.handleWindowResize)
     window.cancelAnimationFrame(requestID)
     controls.dispose()
-  };
+  }
 }

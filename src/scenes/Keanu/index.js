@@ -1,14 +1,13 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import styled from "styled-components/macro"
 
 import Helmet from "components/Helmet"
 import ThreeEnvironment from "components/ThreeEnvironemnt"
 
-export default function View(props) {
+export default function Keanu(props) {
   return (
     <>
-      <Helmet title="View" />
-      <Link to="/dummy-t-shirt">Dummy T-Shirt</Link>
+      <Helmet title="Keanu" />
       <ThreeEnvironment />
     </>
   )
