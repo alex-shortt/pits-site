@@ -1,11 +1,21 @@
 import React, { useContext, useState, useCallback } from "react"
 import { Link } from "react-router-dom"
 import Div100vh from "react-div-100vh"
+import styled from "styled-components/macro"
 
 import { ShopifyContext } from "services/shopify"
 import nf from "assets/img/notfound.png"
+import cartImg from "assets/img/cart.png"
+import backgroundImg from "assets/img/background.jpg"
 
-import "./style.min.css"
+import "./style.css"
+
+const Container = styled.div`
+  background-image: url(${backgroundImg});
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+`
 
 export default function Product(props) {
   const {
@@ -75,41 +85,47 @@ export default function Product(props) {
   ))
 
   return (
-    <Div100vh className="pp">
-      <div className="pp-header">
-        <h1 className="pp-header-text">SKY WORLDWIDE</h1>
-      </div>
-      <div className="pp-product">
-        <div className="pp-product-image-wrap">
-          <img
-            src={product.variants[0].image ? product.variants[0].image.src : nf}
-            alt={product.title}
-            draggable={false}
-            className="pp-product-image"
-          />
+    <Container>
+      <Div100vh className="pp">
+        <div className="pp-header">
+          <h1 className="pp-header-text">SKY WORLDWIDE</h1>
         </div>
-        <div className="pp-product-info">
-          <div className="pp-product-info-price">
-            ${product.variants[0].price}
+        <div className="pp-product">
+          <div className="pp-product-image-wrap">
+            <img
+              src={
+                product.variants[0].image ? product.variants[0].image.src : nf
+              }
+              alt={product.title}
+              draggable={false}
+              className="pp-product-image"
+            />
           </div>
-          <div className="pp-product-info-size">{sizes}</div>
-          <button
-            className="pp-product-info-add-to-cart"
-            type="submit"
-            onClick={() => addToCheckout()}
-          >
-            Add to Cart
-          </button>
+          <div className="pp-product-info">
+            <div className="pp-product-info-price">
+              ${product.variants[0].price}
+            </div>
+            <div className="pp-product-info-size">{sizes}</div>
+            <button
+              className="pp-product-info-add-to-cart"
+              type="submit"
+              onClick={() => addToCheckout()}
+            >
+              add to cart
+            </button>
+          </div>
         </div>
-      </div>
-      <p className="pp-cr">&copy;PUZZLE IN THE SKY LLC | ALL RIGHTS RESERVED</p>
-      <button
-        className="pp-cart"
-        type="submit"
-        onClick={() => setCheckoutOpen(true)}
-      >
-        open cart
-      </button>
-    </Div100vh>
+        <p className="pp-cr">
+          &copy;PUZZLE IN THE SKY LLC | ALL RIGHTS RESERVED
+        </p>
+        <button
+          className="pp-cart"
+          type="submit"
+          onClick={() => setCheckoutOpen(true)}
+        >
+          <img src={cartImg} className="pp-cart-image" />
+        </button>
+      </Div100vh>
+    </Container>
   )
 }
