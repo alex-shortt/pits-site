@@ -35,7 +35,7 @@ export default function Product(props) {
       lineItemsToAdd
     )
     setCheckout(newCheckout)
-    setCheckoutOpen("true")
+    setCheckoutOpen(true)
   })
 
   if (!products) {

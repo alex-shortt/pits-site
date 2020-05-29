@@ -20,7 +20,7 @@ const Container = styled.div`
 const Checkout = styled.div`
   width: 800px;
   height: 500px;
-  background-color: black;
+  background-color: #64a3de;
   border: white solid 5px;
   padding: 20px;
   box-sizing: border-box;
@@ -155,19 +155,15 @@ export default function Cart(props) {
             x
           </Exit>
           <h1>Cart</h1>
-          <Row>
-            <p>ANTI</p>
-            <p>IMAGE</p>
-            <p>SIZE</p>
-            <p>PRODUCT NAME</p>
-            <p>QUANTITY</p>
-            <p>PRICE</p>
-          </Row>
         </Header>
         <Content>
           {lineItems && lineItems.length > 0 ? (
             lineItems.map(item => (
-              <Item item={item} removeFromCheckout={removeFromCheckout} />
+              <Item
+                item={item}
+                key={item.id}
+                removeFromCheckout={removeFromCheckout}
+              />
             ))
           ) : (
             <EmptyText>YOUR CART IS EMPTY</EmptyText>
