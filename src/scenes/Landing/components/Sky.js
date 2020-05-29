@@ -17,7 +17,6 @@ const Container = styled.div`
 `
 
 export default function Sky(props) {
-  const [loading, setLoading] = useState("true")
   const [mouseY, setMouseY] = useState(0)
   const [orientation, setOrientation] = useState(0)
   const [scrollDist, setScrollDist] = useState(0)
@@ -54,10 +53,6 @@ export default function Sky(props) {
     orientation,
     scrollDist
   ])
-  //
-  // if (loading === "true") {
-  //   return <>...</>
-  // }
 
   return (
     <Container onMouseMove={handleMousePositionChange}>
@@ -79,7 +74,7 @@ export default function Sky(props) {
       />
       <Cloud
         image={cloud2}
-        xInit={0}
+        xInit={40}
         y={50}
         offset={offset}
         layer={15}
@@ -88,8 +83,8 @@ export default function Sky(props) {
       {/* long and lazy */}
       <Cloud
         image={cloud3}
-        xInit={50}
-        y={64}
+        xInit={39}
+        y={84}
         offset={offset}
         layer={4}
         style={{ height: "30vh" }}
