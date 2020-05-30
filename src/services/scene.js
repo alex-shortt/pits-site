@@ -4,11 +4,11 @@ import { Sky } from "three/examples/jsm/objects/Sky"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { RoughnessMipmapper } from "three/examples/jsm/utils/RoughnessMipmapper"
 
-import keanuModel from "../models/keanu/keanu2.glb"
+import keanuModel from "../models/keanu/keanu3.glb"
 
 let mouseY
 let hoverOnKeanu
-let rotSpeed = 0.001
+let rotSpeed = 0.0004
 
 let lastUpdate = Date.now()
 
@@ -20,7 +20,7 @@ export class ThreeScene {
     mouseY = 0
     // camera
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 2000)
-    camera.position.set(0, 1.2, 0.8)
+    camera.position.set(0, 1.3, 0.8)
     camera.rotation.set(315, 0, 0)
     camera.lookAt(0, 0.25, 0)
 
@@ -138,7 +138,7 @@ export class ThreeScene {
       return
     }
 
-    const keanuHimself = keanu.children[0].children[0].children[0]
+    const keanuHimself = keanu.children[0].children[0].children[0].children[0]
 
     mouse.x = (event.clientX / width) * 2 - 1
     mouse.y = -(event.clientY / height) * 2 + 1
@@ -153,7 +153,7 @@ export class ThreeScene {
       hoverOnKeanu = false
     }
 
-    if (hoverOnKeanu) {
+    if (hoverOnKeanu && width > 768) {
       // containerRef.style.filter = "brightness(0.7)"
       containerRef.style.cursor = "pointer"
       rotSpeed = 0.0001
@@ -206,7 +206,7 @@ export class ThreeScene {
       this.keanu = gltf.scene
       this.raycaster = raycaster
       this.mouse = mouse
-      console.log(gltf.scene)
+      //  console.log(gltf.scene)
     })
 
     const geometry = new THREE.ConeBufferGeometry(20, 100, 3)

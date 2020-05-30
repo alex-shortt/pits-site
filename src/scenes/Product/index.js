@@ -44,7 +44,7 @@ export default function Product(props) {
     )
     setCheckout(newCheckout)
     setCheckoutOpen(true)
-  }, [curVariantId, client.checkout, checkout.id, setCheckout, setCheckoutOpen])
+  })
 
   if (!products) {
     return (
