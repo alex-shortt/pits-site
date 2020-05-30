@@ -36,7 +36,7 @@ const PuzzlePiece = styled(animated.div)`
   z-index: 51;
   cursor: pointer;
 
-  ${props => props.done && "pointer-events: none;"};
+  ${props => props.done && "pointer-events: none"};
 
   & > div {
     position: relative;

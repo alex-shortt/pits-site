@@ -48,7 +48,7 @@ export default function Landing(props) {
 
   return (
     <>
-      <Helmet title="Puzzle In The Sky" />
+      <Helmet />
       <Wrapper
         style={{
           background: exit.interpolate(
