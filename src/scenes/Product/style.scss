@@ -6,7 +6,7 @@
   }
 }
 @mixin text {
-  font-family: "Helvetica", Helvetica, sans-serif;
+  font-family: 'Helvetica', Helvetica, sans-serif;
   color: white;
   text-shadow: 3px 3px 5px rgba(50, 50, 50, 0.5);
   font-weight: bold;
@@ -45,11 +45,16 @@ button {
 }
 
 .pp {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
+
+  &-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   &-loading {
     justify-content: center;
@@ -60,11 +65,14 @@ button {
   }
 
   &-header {
-    height: #{$header-height};
+    height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @include phones {
+      height: 75px;
+    }
 
     &-text {
       padding: 0;
@@ -73,6 +81,9 @@ button {
       transform: scaleX(1.5);
       user-select: none;
       @include text();
+      @include phones {
+        font-size: 20px;
+      }
     }
   }
 
@@ -84,6 +95,9 @@ button {
     justify-content: flex-end;
     width: 95%;
     max-width: 800px;
+    @include phones {
+      height: 80%;
+    }
 
     &-image {
       height: 100%;
@@ -97,6 +111,10 @@ button {
         align-items: center;
         justify-content: center;
         padding: 25px 0;
+        @include phones {
+          padding: 0;
+          height: 65%;
+        }
       }
     }
 
@@ -108,6 +126,9 @@ button {
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      @include phones {
+        height: 35%;
+      }
 
       &-price {
         font-size: 40px;
@@ -155,17 +176,28 @@ button {
 
   &-cr {
     @include text();
+    @include phones {
+      font-size: 10px;
+    }
   }
 
   &-cart {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 25px;
+    right: 30px;
     cursor: pointer;
+    @include phones {
+      top: 60px;
+      right: 20px;
+    };
 
     &-image {
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
+      @include phones {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
 }
