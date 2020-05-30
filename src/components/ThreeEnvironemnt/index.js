@@ -13,6 +13,7 @@ const Container = styled.div`
 `
 
 export default function ThreeEnvironment(props) {
+  const { history } = props
   const [setup, setSetup] = useState(false)
 
   const containerRef = useRef()

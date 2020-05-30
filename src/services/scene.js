@@ -6,15 +6,14 @@ import { RoughnessMipmapper } from "three/examples/jsm/utils/RoughnessMipmapper"
 
 import keanuModel from "../models/keanu/keanu2.glb"
 
-let mouseX
 let mouseY
+let found
 
 export class ThreeScene {
   threeSetup = containerRef => {
     // get container dimensions and use them for scene sizing
     const { clientWidth: width, clientHeight: height } = containerRef
 
-    mouseX = 0
     mouseY = 0
     // camera
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 2000)
@@ -55,6 +54,7 @@ export class ThreeScene {
     // events
     window.addEventListener("resize", this.handleWindowResize)
     document.addEventListener("mousemove", this.onDocumentMouseMove, false)
+    document.addEventListener("click", this.onClick, false)
 
     this.render()
   }
@@ -125,7 +125,7 @@ export class ThreeScene {
     const { containerRef } = this
     const { clientWidth: width, clientHeight: height } = containerRef
 
-    mouseX = (event.clientX - width / 2) / (width / 2)
+    // mouseX = (event.clientX - width / 2) / (width / 2)
     mouseY = (event.clientY - height / 2) / (height / 2)
 
     const { mouse, renderer, camera, keanu, raycaster } = this
@@ -133,24 +133,35 @@ export class ThreeScene {
     if (!mouse || !renderer || !camera || !raycaster) {
       return
     }
-
     const keanuHimself = keanu.children[0].children[0].children[0]
 
     mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1
     mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1
     raycaster.setFromCamera(mouse, camera)
 
-    let found = false
-
     for (let i = 0; i < keanuHimself.children.length; i += 1) {
       const intersects = raycaster.intersectObject(keanuHimself.children[i])
       if (intersects.length > 0) {
+        //  history.push("/matrix-tee")
         found = true
         break
       }
+      found = false
     }
 
-    console.log(found)
+    if (found) {
+      document.body.style.filter = "brightness(2)"
+      document.body.style.cursor = "pointer"
+    } else {
+      document.body.style.filter = "none"
+      document.body.style.filter = "inherit"
+    }
+  }
+
+  onClick = event => {
+    if (found) {
+      // history.push('/matrix-tee')
+    }
   }
 
   initKeanu = () => {
