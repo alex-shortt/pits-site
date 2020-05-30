@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components/macro"
 
 import { ThreeScene } from "services/scene"
@@ -13,7 +13,6 @@ const Container = styled.div`
 `
 
 export default function ThreeEnvironment(props) {
-  const { history } = props
   const [setup, setSetup] = useState(false)
 
   const containerRef = useRef()
