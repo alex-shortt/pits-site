@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import Div100vh from "react-div-100vh"
 import styled from "styled-components/macro"
 
+import Helmet from "components/Helmet"
 import { ShopifyContext } from "services/shopify"
 import nf from "assets/img/notfound.png"
 import cartImg from "assets/img/cart.png"
@@ -85,6 +86,7 @@ export default function Product(props) {
   return (
     <Div100vh className="pp">
       <Container className="pp-container">
+      <Helmet title={product.title} />
         <div className="pp-header">
           <h1 className="pp-header-text">SKY WORLDWIDE</h1>
         </div>
