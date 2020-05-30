@@ -91,12 +91,12 @@ const Footer = styled.div`
 
   & a {
     font-size: 20px;
-    color: rgba(250, 250, 250, 0.5);
+    color: white;
     transition: 0.3s;
     text-decoration: none;
 
     &:hover {
-      color: white;
+      color: rgba(250, 250, 250, 0.5);
       transition: 0.3s;
     }
 
@@ -171,7 +171,9 @@ export default function Cart(props) {
         </Content>
         <Footer>
           <h4>Subtotal: ${subtotalPrice}</h4>
-          <a href={webUrl}>CHECKOUT</a>
+          {lineItems && lineItems.length > 0 ? (
+            <a href={webUrl}>CHECKOUT</a>
+          ) : null}
         </Footer>
       </Checkout>
     </Container>
