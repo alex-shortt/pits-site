@@ -9,6 +9,8 @@ import keanuModel from "../models/keanu/keanu2.glb"
 let mouseY
 let found
 
+let lastUpdate = Date.now()
+
 export class ThreeScene {
   threeSetup = containerRef => {
     // get container dimensions and use them for scene sizing
@@ -136,8 +138,8 @@ export class ThreeScene {
     }
     const keanuHimself = keanu.children[0].children[0].children[0]
 
-    mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1
-    mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1
+    mouse.x = (event.clientX / width) * 2 - 1
+    mouse.y = -(event.clientY / height) * 2 + 1
     raycaster.setFromCamera(mouse, camera)
 
     for (let i = 0; i < keanuHimself.children.length; i += 1) {
@@ -201,10 +203,14 @@ export class ThreeScene {
   startAnimationLoop = () => {
     const { stats, keanu } = this
 
+    const now = Date.now()
+    const dt = now - lastUpdate
+    lastUpdate = now
+
     stats.begin()
     this.render()
     if (keanu) {
-      keanu.rotation.y += 0.003
+      keanu.rotation.y += 0.0003 * dt
     }
     stats.end()
 
