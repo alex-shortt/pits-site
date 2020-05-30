@@ -8,13 +8,11 @@ import nf from "assets/img/notfound.png"
 import cartImg from "assets/img/cart.png"
 import backgroundImg from "assets/img/background.jpg"
 
-import "./style.css"
+import "./style.min.css"
 
 const Container = styled.div`
   background-image: url(${backgroundImg});
   background-size: cover;
-  width: 100%;
-  height: 100%;
 `
 
 export default function Product(props) {
@@ -85,8 +83,8 @@ export default function Product(props) {
   ))
 
   return (
-    <Container>
-      <Div100vh className="pp">
+    <Div100vh className="pp">
+      <Container className="pp-container">
         <div className="pp-header">
           <h1 className="pp-header-text">SKY WORLDWIDE</h1>
         </div>
@@ -123,9 +121,9 @@ export default function Product(props) {
           type="submit"
           onClick={() => setCheckoutOpen(true)}
         >
-          <img src={cartImg} className="pp-cart-image" />
+          <img src={cartImg} className="pp-cart-image" alt="Cart" />
         </button>
-      </Div100vh>
-    </Container>
+      </Container>
+    </Div100vh>
   )
 }
