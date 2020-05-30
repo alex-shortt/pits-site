@@ -44,7 +44,7 @@ const ContinueText = styled.h2`
   font-family: "Helvetica", Helvetica, sans-serif;
   color: white;
   position: absolute;
-  bottom: 0;
+  bottom: 2px;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 5;
@@ -52,6 +52,7 @@ const ContinueText = styled.h2`
   pointer-events: none;
   opacity: 1;
   transition: 1s ease-out opacity;
+  text-align: center;
   ${props => props.loaded && "opacity: 0"};
 `
 

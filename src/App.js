@@ -20,6 +20,8 @@ const GoogleAnalytics = () => {
 }
 
 export default function App() {
+  printCredits()
+
   return (
     <ShopifyProvider>
       <Cart />
@@ -39,4 +41,24 @@ export default function App() {
       </React.Suspense>
     </ShopifyProvider>
   )
+}
+
+function printCredits() {
+  const credits = `
+ ______   __     ______   ______
+/\\  == \\ /\\ \\   /\\__  _\\ /\\  ___\\
+\\ \\  _-/ \\ \\ \\  \\/_/\\ \\/ \\ \\___  \\
+ \\ \\_\\    \\ \\_\\    \\ \\_\\  \\/\\_____\\
+  \\/_/     \\/_/     \\/_/   \\/_____/
+ Puzzle in the Sky
+ 
+  Alex Shortt
+      https://instagram.com/alexander.shortt
+      https://twitter.com/_alexshortt
+      
+  Peter Campanelli
+      https://instagram.com/petercampanelli
+      https://twitter.com/petercampanelli
+  `
+  console.log(credits)
 }
