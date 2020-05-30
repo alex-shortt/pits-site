@@ -80,7 +80,7 @@ export default function ThreeEnvironment(props) {
       <Container ref={containerRef} />
       <LoadingContainer loaded={loaded} />
       <LoadingText loaded={loaded}>Loading...</LoadingText>
-      <ContinueText>Select Keanu to Continue</ContinueText>
+      <ContinueText>Select Neo to Continue</ContinueText>
     </>
   )
 }

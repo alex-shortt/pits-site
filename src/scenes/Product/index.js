@@ -86,7 +86,7 @@ export default function Product(props) {
   return (
     <Div100vh className="pp">
       <Container className="pp-container">
-        <Helmet title={product.title} />
+        <Helmet title="Shop" />
         <div className="pp-header">
           <h1 className="pp-header-text">SKY WORLDWIDE</h1>
         </div>

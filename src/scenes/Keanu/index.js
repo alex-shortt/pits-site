@@ -8,7 +8,7 @@ export default function Keanu(props) {
 
   return (
     <>
-      <Helmet title="Keanu" />
+      <Helmet title="Entry Way" />
       <ThreeEnvironment history={history} />
     </>
   )

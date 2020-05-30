@@ -30,7 +30,7 @@ export default function App() {
           <ScrollToTop>
             <Switch>
               <Route path="/" exact component={Landing} />
-              <Route path="/keanu" exact component={Keanu} />
+              <Route path="/entryway" exact component={Keanu} />
               <Route path="/:handle" component={Product} />
               {/* TODO: 404 Page */}
             </Switch>

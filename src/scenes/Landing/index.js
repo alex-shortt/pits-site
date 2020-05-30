@@ -40,7 +40,7 @@ export default function Landing(props) {
         set({ exit: 1 })
 
         setTimeout(() => {
-          history.push("/keanu")
+          history.push("/entryway")
         }, 3500)
       }, 750)
     }
