@@ -183,7 +183,7 @@ export class ThreeScene {
     }
   }
 
-  initKeanu = () => {
+  initKeanu = setLoaded => {
     const { renderer, scene } = this
 
     const roughnessMipmapper = new RoughnessMipmapper(renderer)
@@ -195,6 +195,7 @@ export class ThreeScene {
       })
 
       scene.add(gltf.scene)
+      setLoaded(true)
 
       roughnessMipmapper.dispose()
 
