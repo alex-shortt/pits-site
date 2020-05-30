@@ -7,12 +7,13 @@ import { RoughnessMipmapper } from "three/examples/jsm/utils/RoughnessMipmapper"
 import keanuModel from "../models/keanu/keanu2.glb"
 
 let mouseY
-let found
+let hoverOnKeanu
+let rotSpeed = 0.001
 
 let lastUpdate = Date.now()
 
 export class ThreeScene {
-  threeSetup = containerRef => {
+  threeSetup = (containerRef, history) => {
     // get container dimensions and use them for scene sizing
     const { clientWidth: width, clientHeight: height } = containerRef
 
@@ -52,6 +53,7 @@ export class ThreeScene {
     this.camera = camera
     this.renderer = renderer
     this.stats = stats
+    this.history = history
 
     // events
     window.addEventListener("resize", this.handleWindowResize)
@@ -128,13 +130,14 @@ export class ThreeScene {
     const { clientWidth: width, clientHeight: height } = containerRef
 
     // mouseX = (event.clientX - width / 2) / (width / 2)
-    mouseY = (event.clientY - height / 2) / (height / 2)
+    // mouseY = (event.clientY - height / 2) / (height / 2)
 
     const { mouse, renderer, camera, keanu, raycaster } = this
 
     if (!mouse || !renderer || !camera || !raycaster) {
       return
     }
+
     const keanuHimself = keanu.children[0].children[0].children[0]
 
     mouse.x = (event.clientX / width) * 2 - 1
@@ -144,25 +147,39 @@ export class ThreeScene {
     for (let i = 0; i < keanuHimself.children.length; i += 1) {
       const intersects = raycaster.intersectObject(keanuHimself.children[i])
       if (intersects.length > 0) {
-        //  history.push("/matrix-tee")
-        found = true
+        hoverOnKeanu = true
         break
       }
-      found = false
+      hoverOnKeanu = false
     }
 
-    if (found) {
-      document.body.style.filter = "brightness(2)"
-      document.body.style.cursor = "pointer"
+    if (hoverOnKeanu) {
+      // containerRef.style.filter = "brightness(0.7)"
+      containerRef.style.cursor = "pointer"
+      rotSpeed = 0.0001
+
+      // bright material
+      for (let i = 0; i < keanuHimself.children.length; i += 1) {
+        const mesh = keanuHimself.children[i]
+        mesh.material.emissive = new THREE.Color(0xaaaaaa)
+        mesh.material.emissiveIntensity = 0.5
+      }
     } else {
-      document.body.style.filter = "none"
-      document.body.style.filter = "inherit"
+      // containerRef.style.filter = "none"
+      containerRef.style.filter = "inherit"
+      rotSpeed = 0.0004
+
+      // bright material
+      for (let i = 0; i < keanuHimself.children.length; i += 1) {
+        const mesh = keanuHimself.children[i]
+        mesh.material.emissive = new THREE.Color("black")
+      }
     }
   }
 
   onClick = event => {
-    if (found) {
-      // history.push('/matrix-tee')
+    if (hoverOnKeanu && this.history) {
+      this.history.push("/matrix-tee")
     }
   }
 
@@ -207,7 +224,7 @@ export class ThreeScene {
     stats.begin()
     this.render()
     if (keanu) {
-      keanu.rotation.y += 0.0003 * dt
+      keanu.rotation.y += rotSpeed * dt
     }
     stats.end()
 

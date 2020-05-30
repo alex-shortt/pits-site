@@ -10,9 +10,11 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   z-index: 0;
+  transition: filter 0.15s linear;
 `
 
 export default function ThreeEnvironment(props) {
+  const { history } = props
   const [setup, setSetup] = useState(false)
 
   const containerRef = useRef()
@@ -20,14 +22,14 @@ export default function ThreeEnvironment(props) {
   useEffect(() => {
     if (setup === false) {
       const scene = new ThreeScene()
-      scene.threeSetup(containerRef.current)
+      scene.threeSetup(containerRef.current, history)
       scene.initSky()
       scene.initKeanu()
       scene.startAnimationLoop()
 
       setSetup(true)
     }
-  }, [setup])
+  }, [history, setup])
 
   return <Container ref={containerRef} />
 }
