@@ -44,7 +44,7 @@ export class ThreeScene {
 
     // stats
     const stats = new Stats()
-    containerRef.appendChild(stats.dom)
+    // containerRef.appendChild(stats.dom)
 
     containerRef.appendChild(renderer.domElement)
     // exports
