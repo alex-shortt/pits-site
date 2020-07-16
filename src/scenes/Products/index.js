@@ -5,8 +5,8 @@ import skyLogo from "assets/img/sky-logo.png"
 import Helmet from "components/Helmet"
 import Sky from "components/Sky"
 import { ShopifyContext } from "services/shopify"
-
-import ProductListing from "../../components/ProductListing"
+import ProductListing from "components/ProductListing"
+import CartIcon from "components/CartIcon"
 
 const Container = styled.div`
   width: 95%;
@@ -40,6 +40,7 @@ export default function Products(props) {
     <>
       <Helmet title="Products" />
       <Sky />
+      <CartIcon />
       <Container>
         <Header>
           <Image />
