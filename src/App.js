@@ -12,6 +12,7 @@ import Cart from "components/Cart"
 const Landing = React.lazy(() => import("scenes/Landing"))
 const Keanu = React.lazy(() => import("scenes/Keanu"))
 const Product = React.lazy(() => import("scenes/Product"))
+const Products = React.lazy(() => import("scenes/Products"))
 
 const GoogleAnalytics = () => {
   const { location } = useReactRouter()
@@ -32,6 +33,7 @@ export default function App() {
           <ScrollToTop>
             <Switch>
               <Route path="/" exact component={Landing} />
+              <Route path="/products" exact component={Products} />
               <Route path="/entryway" exact component={Keanu} />
               <Route path="/:handle" component={Product} />
               {/* TODO: 404 Page */}
