@@ -34,11 +34,16 @@ const Button = styled(Link)`
   border-radius: 4px;
   margin-top: 20px;
   box-sizing: border-box;
+  transition: all 0.15s ease;
+
+  &:hover {
+    filter: invert(1);
+  }
 `
 
 export default function ProductListing(props) {
   const { product } = props
-  console.log(product)
+
   return (
     <Container>
       <Image src={product.images[0].src} />

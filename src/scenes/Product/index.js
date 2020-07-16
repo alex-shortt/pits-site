@@ -1,19 +1,95 @@
-import React, { useContext, useState, useCallback } from "react"
-import { Link } from "react-router-dom"
-import Div100vh from "react-div-100vh"
+import React, { useCallback, useContext, useState } from "react"
 import styled from "styled-components/macro"
+import { Link } from "react-router-dom"
 
+import skyLogo from "assets/img/sky-logo.png"
 import Helmet from "components/Helmet"
+import Sky from "components/Sky"
 import { ShopifyContext } from "services/shopify"
-import nf from "assets/img/notfound.png"
-import cartImg from "assets/img/cart.png"
-import backgroundImg from "assets/img/background.jpg"
-
-import "./style.min.css"
+import CartIcon from "components/CartIcon"
+import BackIcon from "components/BackIcon"
 
 const Container = styled.div`
-  background-image: url(${backgroundImg});
-  background-size: cover;
+  width: 95%;
+  max-width: 900px;
+  margin: 0 auto;
+`
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+`
+
+const Image = styled.img.attrs({ src: skyLogo })`
+  width: 150px;
+  height: auto;
+`
+
+const ProductContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 80px 0;
+  flex-direction: row;
+`
+
+const Variant = styled.button`
+  font-family: Arial, sans-serif;
+  color: white;
+  font-weight: 900;
+  max-width: 80px;
+  padding: 10px 20px;
+  font-size: 1.25rem;
+  background: none;
+  border: 2px solid;
+  border-color: ${props => (props.selected ? "white" : "transparent")};
+  cursor: pointer;
+  outline: none;
+`
+
+const VariantContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+const Half = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px 25px;
+`
+
+const Title = styled.h1`
+  margin: 25px 0 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 1.75rem;
+  color: white;
+`
+
+const Button = styled.button`
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: ${props => (props.disabled ? "gray" : "white")};
+  color: black;
+  border-radius: 4px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  border: none;
+  cursor: ${props => (props.disabled ? "auto" : "pointer")};
+  transition: all 0.15s ease;
+
+  &:hover {
+    filter: ${props => (props.disabled ? "invert(0)" : "invert(1)")};
+  }
 `
 
 export default function Product(props) {
@@ -49,9 +125,17 @@ export default function Product(props) {
 
   if (!products) {
     return (
-      <Div100vh className="pp pp-loading">
-        <h1 className="pp-loading-text">Loading...</h1>
-      </Div100vh>
+      <>
+        <Sky />
+        <Container>
+          <Header>
+            <Image />
+          </Header>
+          <ProductContainer>
+            <h1>Loading...</h1>
+          </ProductContainer>
+        </Container>
+      </>
     )
   }
 
@@ -59,73 +143,59 @@ export default function Product(props) {
 
   if (!product) {
     return (
-      <Div100vh className="pp pp-loading">
-        <h1 className="pp-loading-text">
-          We couldn't find the product you're looking for...
-        </h1>
-        <Link to="/">Home</Link>
-      </Div100vh>
+      <>
+        <Sky />
+        <Container>
+          <Header>
+            <Image />
+          </Header>
+          <ProductContainer>
+            <h1>Could not find product</h1>
+            <Link to="/products">Go Back</Link>
+          </ProductContainer>
+        </Container>
+      </>
     )
   }
 
-  const sizes = product.variants.map((variant, index) => (
-    <button
-      type="button"
-      className={`pp-product-info-size-button ${
-        curVariantId === variant.id
-          ? "pp-product-info-size-button-selected"
-          : ""
-      }`}
+  const image = product.images[0].src
+  const sizes = product.variants.map(variant => (
+    <Variant
+      selected={curVariantId === variant.id}
       key={variant.id}
       onClick={() => setVariantId(variant.id)}
     >
       {variant.title}
-    </button>
+    </Variant>
   ))
 
   return (
-    <Div100vh className="pp">
-      <Container className="pp-container">
-        <Helmet title="Shop" />
-        <div className="pp-header">
-          <h1 className="pp-header-text">SKY WORLDWIDE</h1>
-        </div>
-        <div className="pp-product">
-          <div className="pp-product-image-wrap">
-            <img
-              src={
-                product.variants[0].image ? product.variants[0].image.src : nf
-              }
-              alt={product.title}
-              draggable={false}
-              className="pp-product-image"
-            />
-          </div>
-          <div className="pp-product-info">
-            <div className="pp-product-info-price">
-              ${product.variants[0].price}
-            </div>
-            <div className="pp-product-info-size">{sizes}</div>
-            <button
-              className="pp-product-info-add-to-cart"
-              type="submit"
-              onClick={() => addToCheckout()}
-            >
-              add to cart
-            </button>
-          </div>
-        </div>
-        <p className="pp-cr">
-          &copy;PUZZLE IN THE SKY LLC | ALL RIGHTS RESERVED
-        </p>
-        <button
-          className="pp-cart"
-          type="submit"
-          onClick={() => setCheckoutOpen(true)}
-        >
-          <img src={cartImg} className="pp-cart-image" alt="Cart" />
-        </button>
+    <>
+      <Helmet title="Products" />
+      <Sky />
+      <CartIcon />
+      <BackIcon to="/products" />
+      <Container>
+        <Header>
+          <Image />
+        </Header>
+        <ProductContainer>
+          <Half>
+            <img src={image} alt={product.title} />
+          </Half>
+          <Half>
+            <Title>{product.title}</Title>
+            <Title>${product.variants[0].price}</Title>
+            <br />
+            <br />
+            <br />
+            <VariantContainer>{sizes}</VariantContainer>
+            <Button onClick={addToCheckout} disabled={!curVariantId}>
+              Add To Cart
+            </Button>
+          </Half>
+        </ProductContainer>
       </Container>
-    </Div100vh>
+    </>
   )
 }
