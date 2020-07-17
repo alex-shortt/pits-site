@@ -8,30 +8,24 @@ import Sky from "components/Sky"
 import { ShopifyContext } from "services/shopify"
 import CartIcon from "components/CartIcon"
 import BackIcon from "components/BackIcon"
+import SkyLogo from "components/SkyLogo"
 
 const Container = styled.div`
   width: 95%;
   max-width: 900px;
   margin: 0 auto;
 `
-const Header = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 50px 0;
-`
-
-const Image = styled.img.attrs({ src: skyLogo })`
-  width: 150px;
-  height: auto;
-`
 
 const ProductContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 80px 0;
+  margin-top: 80px;
   flex-direction: row;
+
+  @media screen and (max-width: 850px) {
+    flex-direction: column;
+  }
 `
 
 const Variant = styled.button`
@@ -75,7 +69,7 @@ const Button = styled.button`
   width: 100%;
   padding: 10px;
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   text-transform: uppercase;
   text-decoration: none;
   background: ${props => (props.disabled ? "gray" : "white")};
@@ -86,10 +80,16 @@ const Button = styled.button`
   border: none;
   cursor: ${props => (props.disabled ? "auto" : "pointer")};
   transition: all 0.15s ease;
+  max-width: 400px;
+  margin: 0 auto;
 
   &:hover {
     filter: ${props => (props.disabled ? "invert(0)" : "invert(1)")};
   }
+`
+
+const Image = styled.img`
+  object-fit: contain;
 `
 
 export default function Product(props) {
@@ -128,9 +128,7 @@ export default function Product(props) {
       <>
         <Sky />
         <Container>
-          <Header>
-            <Image />
-          </Header>
+          <SkyLogo />
           <ProductContainer>
             <h1>Loading...</h1>
           </ProductContainer>
@@ -146,12 +144,10 @@ export default function Product(props) {
       <>
         <Sky />
         <Container>
-          <Header>
-            <Image />
-          </Header>
+          <SkyLogo />
           <ProductContainer>
             <h1>Could not find product</h1>
-            <Link to="/products">Go Back</Link>
+            <Link to="/">Go Back</Link>
           </ProductContainer>
         </Container>
       </>
@@ -171,17 +167,15 @@ export default function Product(props) {
 
   return (
     <>
-      <Helmet title="Products" />
+      <Helmet title="Product" />
       <Sky />
       <CartIcon />
       <BackIcon to="/products" />
       <Container>
-        <Header>
-          <Image />
-        </Header>
+        <SkyLogo />
         <ProductContainer>
           <Half>
-            <img src={image} alt={product.title} />
+            <Image src={image} alt={product.title} />
           </Half>
           <Half>
             <Title>{product.title}</Title>
