@@ -60,15 +60,15 @@ const Exit = styled.button`
   }
 `
 
-const Row = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-
-  @media screen and (max-width: 650px) {
-    display: none;
-  }
-`
+// const Row = styled.div`
+//   display: flex;
+//   width: 100%;
+//   justify-content: space-around;
+//
+//   @media screen and (max-width: 650px) {
+//     display: none;
+//   }
+// `
 
 const Content = styled.div`
   display: flex;
@@ -115,7 +115,7 @@ const EmptyText = styled.h4`
 `
 
 export default function Cart(props) {
-  const {} = props
+  // const {} = props
   const {
     checkout,
     setCheckout,

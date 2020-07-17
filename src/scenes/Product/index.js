@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useState } from "react"
 import styled from "styled-components/macro"
 import { Link } from "react-router-dom"
 
-import skyLogo from "assets/img/sky-logo.png"
 import Helmet from "components/Helmet"
 import Sky from "components/Sky"
 import { ShopifyContext } from "services/shopify"
@@ -46,6 +45,7 @@ const VariantContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 `
 const Half = styled.div`
   flex: 1;
@@ -121,7 +121,7 @@ export default function Product(props) {
     )
     setCheckout(newCheckout)
     setCheckoutOpen(true)
-  })
+  }, [checkout.id, client.checkout, curVariantId, setCheckout, setCheckoutOpen])
 
   if (!products) {
     return (

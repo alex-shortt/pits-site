@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
-import styled from "styled-components/macro"
 import { useSpring, animated } from "react-spring"
 
+import styled from "styled-components/macro"
 import Helmet from "components/Helmet"
-
 import Sky from "./components/Sky"
 import Puzzle from "./components/Puzzle"
 

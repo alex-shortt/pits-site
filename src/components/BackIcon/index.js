@@ -15,6 +15,10 @@ const Container = styled(Link)`
   transition: opacity 0.25s linear;
   text-decoration: none;
 
+  @media screen and (max-width: 850px) {
+    top: 50px;
+  }
+
   &:hover {
     opacity: 0.75;
   }

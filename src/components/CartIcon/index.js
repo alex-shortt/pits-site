@@ -15,6 +15,10 @@ const Container = styled.button`
   cursor: pointer;
   transition: opacity 0.25s linear;
 
+  @media screen and (max-width: 850px) {
+    top: 50px;
+  }
+
   &:hover {
     opacity: 0.75;
   }
