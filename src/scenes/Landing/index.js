@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useSpring, animated } from "react-spring"
-
 import styled from "styled-components/macro"
+
 import Helmet from "components/Helmet"
+
 import Sky from "./components/Sky"
 import Puzzle from "./components/Puzzle"
 
@@ -39,7 +40,7 @@ export default function Landing(props) {
         set({ exit: 1 })
 
         setTimeout(() => {
-          history.push("/password")
+          history.push("/products")
         }, 3500)
       }, 750)
     }

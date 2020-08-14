@@ -22,6 +22,26 @@ const ProductContainer = styled.div`
   margin: 90px 0;
 `
 
+const ProductsContent = props => {
+  const { products } = props
+
+  if (!products) {
+    return <>Loading...</>
+  }
+
+  if (products.length === 0) {
+    return <>No products to show...</>
+  }
+
+  return (
+    <>
+      {products.map(prod => (
+        <ProductListing product={prod} />
+      ))}
+    </>
+  )
+}
+
 export default function Products(props) {
   const { products } = useContext(ShopifyContext)
 
@@ -33,15 +53,7 @@ export default function Products(props) {
       <Container>
         <SkyLogo />
         <ProductContainer>
-          {!products ? (
-            <>Loading...</>
-          ) : (
-            <>
-              {products.map(prod => (
-                <ProductListing product={prod} />
-              ))}
-            </>
-          )}
+          <ProductsContent products={products} />
         </ProductContainer>
       </Container>
     </>

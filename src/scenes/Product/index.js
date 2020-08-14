@@ -90,6 +90,8 @@ const Button = styled.button`
 
 const Image = styled.img`
   object-fit: contain;
+  max-width: 100%;
+  max-height: 500px;
 `
 
 export default function Product(props) {
@@ -110,7 +112,7 @@ export default function Product(props) {
   const [curVariantId, setVariantId] = useState(null)
 
   const addToCheckout = useCallback(async () => {
-    if (!curVariantId) {
+    if (!curVariantId || !checkout) {
       return
     }
 
@@ -121,7 +123,7 @@ export default function Product(props) {
     )
     setCheckout(newCheckout)
     setCheckoutOpen(true)
-  }, [checkout.id, client.checkout, curVariantId, setCheckout, setCheckoutOpen])
+  }, [checkout, client.checkout, curVariantId, setCheckout, setCheckoutOpen])
 
   if (!products) {
     return (
