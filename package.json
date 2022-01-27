@@ -89,7 +89,7 @@
     "shopify-buy": "^2.10.0",
     "stats-js": "^1.0.1",
     "styled-components": "^4.2.0",
-    "three": "^0.116.1",
+    "three": "^0.137.0",
     "typeface-roboto": "^0.0.54",
     "use-deep-compare-effect": "^1.2.0",
     "use-react-router": "^1.0.7"
